@@ -33,20 +33,22 @@ public class Calculator : MonoBehaviour
     }
     //end singleton stuff
 
-    public void Calculate(int ballistic, int strength, int toughness)
+    public void Calculate(int ballistic, int strength, int toughness, int shots)
     {
-        CheckHit(ballistic, strength, toughness);
+        CheckHit(ballistic, strength, toughness, shots);
     }
 
-    void CheckHit(int ballistic, int strength, int toughness)
+    void CheckHit(int ballistic, int strength, int toughness, int shots)
     {
-
+        //convert results to string printouts of all rolls
+        int hitCount = 0;
         bool result = false;
         int roll = Random.Range(1, 6);
         HitValue.Invoke(roll);
 
         if (roll > ballistic)
         {
+            hitCount++;
             result = true;
         }
         else
@@ -62,6 +64,7 @@ public class Calculator : MonoBehaviour
     void CalculateWounds(int strength, int toughness, bool hit)
     {
         int threshold = 0;
+
         if (!hit)
         {
             WoundValue.Invoke(0);

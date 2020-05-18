@@ -11,6 +11,8 @@ public class RollButton : MonoBehaviour
     private TMP_InputField strength;
     [SerializeField]
     private TMP_InputField toughness;
+    [SerializeField]
+    private TMP_InputField shotNumber;
 
     public void ActivateCalculator()
     {
@@ -29,10 +31,16 @@ public class RollButton : MonoBehaviour
             Debug.Log("Null Input");
             return;
         }
+        if (shotNumber.text == "")
+        {
+            Debug.Log("Null Input");
+            return;
+        }
 
         int b = Convert.ToInt32(ballistic.text);
         int s = Convert.ToInt32(strength.text);
         int t = Convert.ToInt32(toughness.text);
-        Calculator.Instance.Calculate(b, s, t);
+        int sh = Convert.ToInt32(shotNumber);
+        Calculator.Instance.Calculate(b, s, t, sh);
     }
 }

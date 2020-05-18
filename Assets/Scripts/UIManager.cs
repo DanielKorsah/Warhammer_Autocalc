@@ -73,5 +73,6 @@ public class UIManager : MonoBehaviour
         {
             WoundResultText.text = $"<color=yellow>Not Wounded!</color>";
         }
+
     }
 }
