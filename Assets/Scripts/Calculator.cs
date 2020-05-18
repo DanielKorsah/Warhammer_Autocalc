@@ -4,16 +4,15 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class IntEvent : UnityEvent<int> {}
-public class BoolEvent : UnityEvent<bool> {}
+public class StringEvent : UnityEvent<string> {}
 
 public class Calculator : MonoBehaviour
 {
 
-    public static IntEvent HitValue = new IntEvent();
-    public static BoolEvent HitResult = new BoolEvent();
-    public static IntEvent WoundValue = new IntEvent();
-    public static IntEvent WoundThreshold = new IntEvent();
-    public static BoolEvent WoundResult = new BoolEvent();
+    public static IntEvent HitNumber = new IntEvent();
+    public static StringEvent HitOutput = new StringEvent();
+    public static StringEvent WoundInfo = new StringEvent();
+    public static StringEvent WoundOutput = new StringEvent();
 
     //singleton stuff
     private static Calculator _instance;
@@ -40,59 +39,64 @@ public class Calculator : MonoBehaviour
 
     void CheckHit(int ballistic, int strength, int toughness, int shots)
     {
-        //convert results to string printouts of all rolls
+        string hitOutput = "";
         int hitCount = 0;
-        bool result = false;
-        int roll = Random.Range(1, 6);
-        HitValue.Invoke(roll);
 
-        if (roll > ballistic)
+        for (int i = 0; i < shots; i++)
         {
-            hitCount++;
-            result = true;
-        }
-        else
-        {
-            result = false;
+            int roll = Random.Range(1, 6);
+            if (roll > ballistic)
+            {
+                hitCount++;
+                hitOutput += $"Hit: roll = {roll}\n";
+            }
+            else
+            {
+                hitOutput += $"Miss: roll = {roll}\n";
+            }
         }
 
-        HitResult.Invoke(result);
+        HitNumber.Invoke(hitCount);
+        HitOutput.Invoke(hitOutput);
 
-        CalculateWounds(strength, toughness, result);
+        CalculateWounds(strength, toughness, hitCount);
     }
 
-    void CalculateWounds(int strength, int toughness, bool hit)
+    void CalculateWounds(int strength, int toughness, int hits)
     {
         int threshold = 0;
+        int woundCount = 0;
+        string woundInfo = "";
+        string woundOutput = "";
 
-        if (!hit)
-        {
-            WoundValue.Invoke(0);
-            WoundThreshold.Invoke(0);
-            WoundResult.Invoke(false);
-        }
-        else
-        {
-            if (strength >= (toughness * 2))
-                threshold = 2;
-            else if (strength > toughness && strength < (toughness * 2))
-                threshold = 3;
-            else if (strength == toughness)
-                threshold = 4;
-            else if (strength > (toughness / 2) && strength < toughness)
-                threshold = 5;
-            else if (strength < toughness / 2)
-                threshold = 6;
+        if (strength >= (toughness * 2))
+            threshold = 2;
+        else if (strength > toughness && strength < (toughness * 2))
+            threshold = 3;
+        else if (strength == toughness)
+            threshold = 4;
+        else if (strength > (toughness / 2) && strength < toughness)
+            threshold = 5;
+        else if (strength < toughness / 2)
+            threshold = 6;
 
+        for (int i = 0; i < hits; i++)
+        {
             int roll = Random.Range(1, 6);
-            WoundValue.Invoke(roll);
-            WoundThreshold.Invoke(threshold);
 
             if (roll >= threshold)
-                WoundResult.Invoke(true);
+            {
+                woundCount++;
+                woundInfo += $"Wounded: roll = {roll}\n";
+            }
             else
-                WoundResult.Invoke(false);
+            {
+                woundInfo += $"No : roll = {roll}\n";
+            }
         }
+        WoundInfo.Invoke(woundInfo);
+        WoundOutput.Invoke(woundOutput);
+
     }
 
 }
