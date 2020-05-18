@@ -14,6 +14,9 @@ public class Calculator : MonoBehaviour
     public static StringEvent WoundInfo = new StringEvent();
     public static StringEvent WoundOutput = new StringEvent();
 
+    public static UnityEvent HitScrollAdded = new UnityEvent();
+    public static UnityEvent WoundScrollAdded = new UnityEvent();
+
     //singleton stuff
     private static Calculator _instance;
 
@@ -56,6 +59,7 @@ public class Calculator : MonoBehaviour
             }
         }
 
+        HitScrollAdded.Invoke();
         HitNumber.Invoke(hitCount);
         HitOutput.Invoke(hitOutput);
 
@@ -66,7 +70,7 @@ public class Calculator : MonoBehaviour
     {
         int threshold = 0;
         int woundCount = 0;
-        string woundInfo = "";
+        string woundInfo = "Wound Threshold: ~\nWounds: ~";
         string woundOutput = "";
 
         if (strength >= (toughness * 2))
@@ -87,13 +91,15 @@ public class Calculator : MonoBehaviour
             if (roll >= threshold)
             {
                 woundCount++;
-                woundInfo += $"Wounded: roll = {roll}\n";
+                WoundScrollAdded.Invoke();
+                woundOutput += $"Wounded: roll = {roll}\n";
             }
             else
             {
-                woundInfo += $"No : roll = {roll}\n";
+                woundOutput += $"No : roll = {roll}\n";
             }
         }
+        woundInfo = $"Wound Threshold: {threshold}\nWounds: {woundCount}";
         WoundInfo.Invoke(woundInfo);
         WoundOutput.Invoke(woundOutput);
 

@@ -7,72 +7,72 @@ using UnityEngine.Events;
 public class UIManager : MonoBehaviour
 {
 
-    public TextMeshProUGUI HitRollText;
-    public TextMeshProUGUI HitResultText;
-    public TextMeshProUGUI WoundRollText;
-    public TextMeshProUGUI WoundThresholdText;
-    public TextMeshProUGUI WoundResultText;
+    public TextMeshProUGUI HitNumText;
+    public TextMeshProUGUI HitsOutputText;
+    public TextMeshProUGUI WoundInfoText;
+    public TextMeshProUGUI WoundOutputText;
+
+    public RectTransform HitScroll;
+    public RectTransform WoundScroll;
+
+    public int MaxLinesBeforeScroll = 12;
+
+    private int hitLines;
+    private int woundLines;
+
     void Start()
     {
-        Calculator.HitValue.AddListener(SetHitRoll);
-        Calculator.HitResult.AddListener(SetHitResult);
-        Calculator.WoundValue.AddListener(SetWoundRoll);
-        Calculator.WoundThreshold.AddListener(SetWoundThreshold);
-        Calculator.WoundResult.AddListener(SetWoundResult);
+        Calculator.HitNumber.AddListener(SetHitNumber);
+        Calculator.HitOutput.AddListener(SetHitResult);
+        Calculator.WoundInfo.AddListener(SetWoundInfo);
+        Calculator.WoundOutput.AddListener(SetWoundOutput);
+        Calculator.HitScrollAdded.AddListener(BumpHitScroll);
+        Calculator.WoundScrollAdded.AddListener(BumpHitScroll);
+
     }
 
-    void SetHitRoll(int rollValue)
+    void SetHitNumber(int hits)
     {
-        HitResultText.text = rollValue.ToString();
+        HitNumText.text = hits.ToString();
     }
 
-    void SetHitResult(bool result)
+    void SetHitResult(string result)
     {
-        if (result)
+        HitsOutputText.text = result;
+    }
+
+    void SetWoundInfo(string woundInfo)
+    {
+
+        WoundInfoText.text = woundInfo;
+
+    }
+
+    void SetWoundOutput(string wounds)
+    {
+        if (wounds == "")
         {
-            HitRollText.text = $"<color=red>Hit!</color>";
+            WoundOutputText.text = "~";
         }
         else
         {
-            HitRollText.text = $"<color=yellow>Miss!</color>";
-        }
-    }
-
-    void SetWoundRoll(int rollValue)
-    {
-        if (rollValue == 0)
-        {
-            WoundRollText.text = "~";
-        }
-        else
-        {
-            WoundRollText.text = rollValue.ToString();
+            WoundOutputText.text = wounds;
         }
 
     }
 
-    void SetWoundThreshold(int threshold)
+    void BumpHitScroll()
     {
-        if (threshold == 0)
-        {
-            WoundThresholdText.text = "~";
-        }
-        else
-        {
-            WoundThresholdText.text = threshold.ToString();
-        }
+        hitLines++;
+
+        if (hitLines > MaxLinesBeforeScroll)
+            HitScroll.offsetMax += new Vector2(0, 45);
     }
-
-    void SetWoundResult(bool wounded)
+    void BumpWoundScroll()
     {
-        if (wounded)
-        {
-            WoundResultText.text = $"<color=red>Wounded!</color>";
-        }
-        else
-        {
-            WoundResultText.text = $"<color=yellow>Not Wounded!</color>";
-        }
+        woundLines++;
 
+        if (woundLines > MaxLinesBeforeScroll)
+            WoundScroll.offsetMax += new Vector2(0, 45);
     }
 }

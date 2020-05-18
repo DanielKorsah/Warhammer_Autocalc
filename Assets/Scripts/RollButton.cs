@@ -40,7 +40,7 @@ public class RollButton : MonoBehaviour
         int b = Convert.ToInt32(ballistic.text);
         int s = Convert.ToInt32(strength.text);
         int t = Convert.ToInt32(toughness.text);
-        int sh = Convert.ToInt32(shotNumber);
+        int sh = Convert.ToInt32(shotNumber.text);
         Calculator.Instance.Calculate(b, s, t, sh);
     }
 }
