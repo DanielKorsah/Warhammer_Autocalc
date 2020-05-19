@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
 
     void SetHitNumber(int hits)
     {
-        HitNumText.text = hits.ToString();
+        HitNumText.text = $"Hits: {hits}";
     }
 
     void SetHitResult(string result)
