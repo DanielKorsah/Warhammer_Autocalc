@@ -47,7 +47,7 @@ public class Calculator : MonoBehaviour
 
         for (int i = 0; i < shots; i++)
         {
-            int roll = Random.Range(1, 6);
+            int roll = Random.Range(1, 7);
             if (roll > ballistic)
             {
                 hitCount++;
@@ -86,7 +86,7 @@ public class Calculator : MonoBehaviour
 
         for (int i = 0; i < hits; i++)
         {
-            int roll = Random.Range(1, 6);
+            int roll = Random.Range(1, 7);
 
             if (roll >= threshold)
             {
