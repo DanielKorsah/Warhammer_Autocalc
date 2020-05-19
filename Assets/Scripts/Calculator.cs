@@ -16,6 +16,7 @@ public class Calculator : MonoBehaviour
 
     public static UnityEvent HitScrollAdded = new UnityEvent();
     public static UnityEvent WoundScrollAdded = new UnityEvent();
+    public static UnityEvent StartScrolls = new UnityEvent();
 
     //singleton stuff
     private static Calculator _instance;
@@ -42,6 +43,8 @@ public class Calculator : MonoBehaviour
 
     void CheckHit(int ballistic, int strength, int toughness, int shots)
     {
+        StartScrolls.Invoke();
+
         string hitOutput = "";
         int hitCount = 0;
 
