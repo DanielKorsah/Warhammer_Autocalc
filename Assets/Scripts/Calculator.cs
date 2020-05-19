@@ -52,11 +52,11 @@ public class Calculator : MonoBehaviour
             {
                 hitCount++;
                 HitScrollAdded.Invoke();
-                hitOutput += $"Hit: roll = {roll}\n";
+                hitOutput += $"<color=red>Hit</color>: roll = {roll}\n";
             }
             else
             {
-                hitOutput += $"Miss: roll = {roll}\n";
+                hitOutput += $"<color=yellow>Miss</color>: roll = {roll}\n";
             }
         }
 
@@ -92,11 +92,11 @@ public class Calculator : MonoBehaviour
             {
                 woundCount++;
                 WoundScrollAdded.Invoke();
-                woundOutput += $"Wounded: roll = {roll}\n";
+                woundOutput += $"<color=red>Wounded</color>: roll = {roll}\n";
             }
             else
             {
-                woundOutput += $"No : roll = {roll}\n";
+                woundOutput += $"<color=yellow>No Wound</color>: roll = {roll}\n";
             }
         }
         woundInfo = $"Wound Threshold: {threshold}\nWounds: {woundCount}";
