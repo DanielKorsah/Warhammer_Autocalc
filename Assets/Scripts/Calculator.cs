@@ -51,6 +51,7 @@ public class Calculator : MonoBehaviour
             if (roll > ballistic)
             {
                 hitCount++;
+                HitScrollAdded.Invoke();
                 hitOutput += $"Hit: roll = {roll}\n";
             }
             else
@@ -59,7 +60,6 @@ public class Calculator : MonoBehaviour
             }
         }
 
-        HitScrollAdded.Invoke();
         HitNumber.Invoke(hitCount);
         HitOutput.Invoke(hitOutput);
 

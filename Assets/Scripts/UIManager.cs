@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
         Calculator.WoundInfo.AddListener(SetWoundInfo);
         Calculator.WoundOutput.AddListener(SetWoundOutput);
         Calculator.HitScrollAdded.AddListener(BumpHitScroll);
-        Calculator.WoundScrollAdded.AddListener(BumpHitScroll);
+        Calculator.WoundScrollAdded.AddListener(BumpWoundScroll);
 
     }
 
