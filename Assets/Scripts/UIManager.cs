@@ -16,11 +16,12 @@ public class UIManager : MonoBehaviour
     public RectTransform WoundScroll;
 
     public int MaxLinesBeforeScroll = 12;
-    public int BumpAmount = 60;
+    public float BumpAmount = 60;
 
     private int hitLines;
     private int woundLines;
-    private Vector2 startRect;
+    private Vector2 startRectOffset;
+    private Vector2 startSizeDelta;
     private Vector2 hitTopPos = new Vector2(0, 0);
     private Vector2 woundTopPos = new Vector2(0, 0);
 
@@ -34,7 +35,8 @@ public class UIManager : MonoBehaviour
         Calculator.WoundScrollAdded.AddListener(BumpWoundScroll);
         Calculator.StartScrolls.AddListener(ResetScroll);
 
-        startRect = HitScroll.offsetMax;
+        startRectOffset = HitScroll.offsetMax;
+        startSizeDelta = HitScroll.sizeDelta;
 
     }
 
@@ -75,7 +77,7 @@ public class UIManager : MonoBehaviour
         if (hitLines > MaxLinesBeforeScroll)
         {
             hitTopPos.y += BumpAmount;
-            HitScroll.offsetMax += new Vector2(0, BumpAmount);
+            HitScroll.sizeDelta += new Vector2(0, BumpAmount);
             HitScroll.Translate(-hitTopPos);
         }
 
@@ -87,7 +89,7 @@ public class UIManager : MonoBehaviour
         if (woundLines > MaxLinesBeforeScroll)
         {
             woundTopPos.y += BumpAmount;
-            WoundScroll.offsetMax += new Vector2(0, BumpAmount);
+            WoundScroll.sizeDelta += new Vector2(0, BumpAmount);
             WoundScroll.Translate(-woundTopPos);
         }
 
@@ -95,8 +97,10 @@ public class UIManager : MonoBehaviour
 
     void ResetScroll()
     {
-        HitScroll.offsetMax = startRect;
-        WoundScroll.offsetMax = startRect;
+        HitScroll.offsetMax = startRectOffset;
+        HitScroll.sizeDelta = startSizeDelta;
+        WoundScroll.offsetMax = startRectOffset;
+        WoundScroll.sizeDelta = startSizeDelta;
         hitLines = 0;
         woundLines = 0;
     }
