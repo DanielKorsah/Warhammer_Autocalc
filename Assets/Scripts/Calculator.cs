@@ -54,13 +54,13 @@ public class Calculator : MonoBehaviour
             if (roll > ballistic)
             {
                 hitCount++;
-                HitScrollAdded.Invoke();
                 hitOutput += $"<color=red>Hit</color>: roll = {roll}\n";
             }
             else
             {
                 hitOutput += $"<color=yellow>Miss</color>: roll = {roll}\n";
             }
+            HitScrollAdded.Invoke();
         }
 
         HitNumber.Invoke(hitCount);
@@ -94,13 +94,13 @@ public class Calculator : MonoBehaviour
             if (roll >= threshold)
             {
                 woundCount++;
-                WoundScrollAdded.Invoke();
                 woundOutput += $"<color=red>Wounded</color>: roll = {roll}\n";
             }
             else
             {
                 woundOutput += $"<color=yellow>No Wound</color>: roll = {roll}\n";
             }
+            WoundScrollAdded.Invoke();
         }
         woundInfo = $"Wound Threshold: {threshold}\nWounds: {woundCount}";
         WoundInfo.Invoke(woundInfo);

@@ -42,5 +42,11 @@ public class RollButton : MonoBehaviour
         int t = Convert.ToInt32(toughness.text);
         int sh = Convert.ToInt32(shotNumber.text);
         Calculator.Instance.Calculate(b, s, t, sh);
+
+        int x = 0;
+        do
+        {
+            x++;
+        } while (x < 2);
     }
 }
