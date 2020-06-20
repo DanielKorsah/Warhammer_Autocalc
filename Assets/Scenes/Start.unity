@@ -3874,7 +3874,7 @@ MonoBehaviour:
   WoundOutputText: {fileID: 362332744}
   HitScroll: {fileID: 567327953}
   WoundScroll: {fileID: 362332743}
-  MaxLinesBeforeScroll: 12
+  MaxLinesBeforeScroll: 6
   BumpAmount: 41.2
 --- !u!4 &1340426657
 Transform:
