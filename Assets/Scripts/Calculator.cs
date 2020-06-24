@@ -119,7 +119,7 @@ public class Calculator : MonoBehaviour
     {
         int threshold = armour + piercing;
         int pierceCount = 0;
-        string pierceInfo = $"Pierce Save Threshold: ≤{threshold}\nArmour Pierced: ~";
+        string pierceInfo = $"Pierce Save Threshold: ≥{threshold}\nArmour Pierced: ~";
         string pierceOutput = "";
 
         for (int i = 0; i < woundsCount; i++)
@@ -138,7 +138,7 @@ public class Calculator : MonoBehaviour
             PierceScrollAdded.Invoke();
         }
 
-        pierceInfo = $"Pierce Save Threshold: ≤{threshold}\nArmour Pierced: {pierceCount}";
+        pierceInfo = $"Pierce Save Threshold: ≥{threshold}\nArmour Pierced: {pierceCount}";
         PierceInfo.Invoke(pierceInfo);
         PierceOutput.Invoke(pierceOutput);
     }
