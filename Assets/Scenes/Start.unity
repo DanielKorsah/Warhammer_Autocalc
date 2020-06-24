@@ -805,7 +805,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1700070313}
   m_HandleRect: {fileID: 1700070312}
   m_Direction: 3
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2539,8 +2539,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2031676524}
   m_HandleRect: {fileID: 2031676523}
   m_Direction: 3
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7112,8 +7112,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 517.1, y: -133}
-  m_SizeDelta: {x: 344.7, y: 88.833}
+  m_AnchoredPosition: {x: 1080.1, y: -133}
+  m_SizeDelta: {x: 719.97, y: 88.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1724063810
 MonoBehaviour:
@@ -7133,7 +7133,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Pierce Threshold: ~
+  m_text: 'Pierce Save Threshold: ~
 
     Armour Pierced: ~'
   m_isRightToLeft: 0
@@ -7204,10 +7204,10 @@ MonoBehaviour:
   m_margin: {x: 10, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1724063810}
-    characterCount: 37
+    characterCount: 42
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 4
+    spaceCount: 6
+    wordCount: 5
     linkCount: 0
     lineCount: 2
     pageCount: 1

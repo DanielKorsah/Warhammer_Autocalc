@@ -57,11 +57,11 @@ public class Calculator : MonoBehaviour
             if (roll > ballistic)
             {
                 hitCount++;
-                hitOutput += $"<color=red>Hit</color>\troll = {roll}\n";
+                hitOutput += $"<color=red>Hit</color>\t\troll = {roll}\n";
             }
             else
             {
-                hitOutput += $"<color=yellow>Miss</color>\troll = {roll}\n";
+                hitOutput += $"<color=yellow>Miss</color>\t\troll = {roll}\n";
             }
             HitScrollAdded.Invoke();
         }
@@ -115,28 +115,29 @@ public class Calculator : MonoBehaviour
 
     void CalculateArmourPiercing(int woundsCount, int piercing, int armour)
     {
-        int threshold = armour - piercing;
+        int threshold = armour + piercing;
         int pierceCount = 0;
-        string pierceInfo = $"Pierce Threshold: >{threshold}\nArmour Pierced: ~";
+        string pierceInfo = $"Pierce Save Threshold: ≤{threshold}\nArmour Pierced: ~";
         string pierceOutput = "";
 
         for (int i = 0; i < woundsCount; i++)
         {
             int roll = Random.Range(1, 7);
 
-            if (roll > threshold)
+            if (roll <= threshold)
             {
-                pierceCount++;
-                pierceOutput += $"<color=red>Armour Pierced!</color>\troll = {roll}\n";
+                pierceOutput += $"<color=yellow>Saved! Failed to pierce!</color>\t\troll = {roll}\n";
+
             }
             else
             {
-                pierceOutput += $"<color=yellow>Failed to pierce!</color>\troll = {roll}\n";
+                pierceCount++;
+                pierceOutput += $"<color=red>No Save! Armour Pierced!</color>\troll = {roll}\n";
             }
             PierceScrollAdded.Invoke();
         }
 
-        pierceInfo = $"Pierce Threshold: >{threshold}\nArmour Pierced: {pierceCount}";
+        pierceInfo = $"Pierce Save Threshold: ≤{threshold}\nArmour Pierced: {pierceCount}";
         PierceInfo.Invoke(pierceInfo);
         PierceOutput.Invoke(pierceOutput);
     }
