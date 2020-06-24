@@ -126,15 +126,14 @@ public class Calculator : MonoBehaviour
         {
             int roll = Random.Range(1, 7);
 
-            if (roll <= threshold)
-            {
-                pierceOutput += $"<color=yellow>Saved! Failed to pierce!</color>\t\troll = {roll}\n";
-
-            }
-            else
+            if (roll < threshold)
             {
                 pierceCount++;
                 pierceOutput += $"<color=red>No Save! Armour Pierced!</color>\troll = {roll}\n";
+            }
+            else
+            {
+                pierceOutput += $"<color=yellow>Saved! Failed to pierce!</color>\t\troll = {roll}\n";
             }
             PierceScrollAdded.Invoke();
         }
