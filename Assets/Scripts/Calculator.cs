@@ -13,9 +13,12 @@ public class Calculator : MonoBehaviour
     public static StringEvent HitOutput = new StringEvent();
     public static StringEvent WoundInfo = new StringEvent();
     public static StringEvent WoundOutput = new StringEvent();
+    public static StringEvent PierceInfo = new StringEvent();
+    public static StringEvent PierceOutput = new StringEvent();
 
     public static UnityEvent HitScrollAdded = new UnityEvent();
     public static UnityEvent WoundScrollAdded = new UnityEvent();
+    public static UnityEvent PierceScrollAdded = new UnityEvent();
     public static UnityEvent StartScrolls = new UnityEvent();
 
     //singleton stuff
@@ -36,12 +39,12 @@ public class Calculator : MonoBehaviour
     }
     //end singleton stuff
 
-    public void Calculate(int ballistic, int strength, int toughness, int shots)
+    public void Calculate(int ballistic, int strength, int toughness, int shots, int piercing, int armour)
     {
-        CheckHit(ballistic, strength, toughness, shots);
+        CheckHit(ballistic, strength, toughness, shots, piercing, armour);
     }
 
-    void CheckHit(int ballistic, int strength, int toughness, int shots)
+    void CheckHit(int ballistic, int strength, int toughness, int shots, int piercing, int armour)
     {
         StartScrolls.Invoke();
 
@@ -54,11 +57,11 @@ public class Calculator : MonoBehaviour
             if (roll > ballistic)
             {
                 hitCount++;
-                hitOutput += $"<color=red>Hit</color>: roll = {roll}\n";
+                hitOutput += $"<color=red>Hit</color>\troll = {roll}\n";
             }
             else
             {
-                hitOutput += $"<color=yellow>Miss</color>: roll = {roll}\n";
+                hitOutput += $"<color=yellow>Miss</color>\troll = {roll}\n";
             }
             HitScrollAdded.Invoke();
         }
@@ -66,10 +69,10 @@ public class Calculator : MonoBehaviour
         HitNumber.Invoke(hitCount);
         HitOutput.Invoke(hitOutput);
 
-        CalculateWounds(strength, toughness, hitCount);
+        CalculateWounds(strength, toughness, hitCount, piercing, armour);
     }
 
-    void CalculateWounds(int strength, int toughness, int hits)
+    void CalculateWounds(int strength, int toughness, int hits, int piercing, int armour)
     {
         int threshold = 0;
         int woundCount = 0;
@@ -94,11 +97,11 @@ public class Calculator : MonoBehaviour
             if (roll >= threshold)
             {
                 woundCount++;
-                woundOutput += $"<color=red>Wounded</color>: roll = {roll}\n";
+                woundOutput += $"<color=red>Wounded</color>\troll = {roll}\n";
             }
             else
             {
-                woundOutput += $"<color=yellow>No Wound</color>: roll = {roll}\n";
+                woundOutput += $"<color=yellow>No Wound</color>\troll = {roll}\n";
             }
             WoundScrollAdded.Invoke();
         }
@@ -106,6 +109,36 @@ public class Calculator : MonoBehaviour
         WoundInfo.Invoke(woundInfo);
         WoundOutput.Invoke(woundOutput);
 
+        CalculateArmourPiercing(woundCount, piercing, armour);
+
+    }
+
+    void CalculateArmourPiercing(int woundsCount, int piercing, int armour)
+    {
+        int threshold = armour - piercing;
+        int pierceCount = 0;
+        string pierceInfo = $"Pierce Threshold: >{threshold}\nArmour Pierced: ~";
+        string pierceOutput = "";
+
+        for (int i = 0; i < woundsCount; i++)
+        {
+            int roll = Random.Range(1, 7);
+
+            if (roll > threshold)
+            {
+                pierceCount++;
+                pierceOutput += $"<color=red>Armour Pierced!</color>\troll = {roll}\n";
+            }
+            else
+            {
+                pierceOutput += $"<color=yellow>Failed to pierce!</color>\troll = {roll}\n";
+            }
+            PierceScrollAdded.Invoke();
+        }
+
+        pierceInfo = $"Pierce Threshold: >{threshold}\nArmour Pierced: {pierceCount}";
+        PierceInfo.Invoke(pierceInfo);
+        PierceOutput.Invoke(pierceOutput);
     }
 
 }
