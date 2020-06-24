@@ -5,4 +5,4 @@
 Unity/C# mobile App for calculating hits and wounds in Warhammer 40K.
 
 Latest release:  https://github.com/DanielKorsah/Warhammer_Autocalc/releases/tag/b0.2.1
-
+A web-based demo can be found at: https://www.danielkorsah.com/Games/Web/WarhammerRoller.html
