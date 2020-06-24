@@ -4,5 +4,5 @@
 
 Unity/C# mobile App for calculating hits and wounds in Warhammer 40K.
 
-Latest release:  https://github.com/DanielKorsah/Warhammer_Autocalc/releases/tag/v0.1.1
+Latest release:  https://github.com/DanielKorsah/Warhammer_Autocalc/releases/tag/b0.2.0
 
