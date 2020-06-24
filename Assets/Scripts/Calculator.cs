@@ -9,7 +9,7 @@ public class StringEvent : UnityEvent<string> {}
 public class Calculator : MonoBehaviour
 {
 
-    public static IntEvent HitNumber = new IntEvent();
+    public static StringEvent HitInfo = new StringEvent();
     public static StringEvent HitOutput = new StringEvent();
     public static StringEvent WoundInfo = new StringEvent();
     public static StringEvent WoundOutput = new StringEvent();
@@ -50,6 +50,7 @@ public class Calculator : MonoBehaviour
 
         string hitOutput = "";
         int hitCount = 0;
+        string hitInfo = $"Hit Threshold: {ballistic}\nHits: ~";
 
         for (int i = 0; i < shots; i++)
         {
@@ -66,7 +67,8 @@ public class Calculator : MonoBehaviour
             HitScrollAdded.Invoke();
         }
 
-        HitNumber.Invoke(hitCount);
+        hitInfo = $"Hit Threshold: {ballistic}\nHits: {hitCount}";
+        HitInfo.Invoke(hitInfo);
         HitOutput.Invoke(hitOutput);
 
         CalculateWounds(strength, toughness, hitCount, piercing, armour);

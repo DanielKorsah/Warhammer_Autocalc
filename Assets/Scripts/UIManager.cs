@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class UIManager : MonoBehaviour
 {
 
-    public TextMeshProUGUI HitNumText;
+    public TextMeshProUGUI HitInfoText;
     public TextMeshProUGUI HitsOutputText;
     public TextMeshProUGUI WoundInfoText;
     public TextMeshProUGUI WoundOutputText;
@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        Calculator.HitNumber.AddListener(SetHitNumber);
+        Calculator.HitInfo.AddListener(SetHitInfo);
         Calculator.WoundInfo.AddListener(SetWoundInfo);
         Calculator.PierceInfo.AddListener(SetPierceInfo);
 
@@ -57,9 +57,9 @@ public class UIManager : MonoBehaviour
 
     }
 
-    void SetHitNumber(int hits)
+    void SetHitInfo(string hitStats)
     {
-        HitNumText.text = $"Hits: {hits}";
+        HitInfoText.text = hitStats;
     }
 
     void SetHitResult(string result)
